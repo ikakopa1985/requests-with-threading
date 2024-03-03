@@ -1,7 +1,6 @@
 import threading
 import requests
 import time
-import random
 import json
 
 class CustomThread(threading.Thread):
@@ -23,6 +22,7 @@ def requestUrl(url):
     response_text = response.content.decode('utf-8')
     return json.loads(response_text)
 
+
 startTime = time.perf_counter()
 print('\n'*40)
 url = 'https://dummyjson.com/products/'
@@ -38,13 +38,7 @@ for item in range(0,100):
     results.append(res)
 
 with open('response.json', 'w') as json_file:
-    json.dump(results, json_file)
-
-with open('response.json', 'r') as json_file:
-    json_data = json_file.read()
-    parsed_data = json.loads(json_data)
-    print(parsed_data)
-
-print()
+    json.dump(results, json_file, indent = 4)  
+    
 finish = time.perf_counter()
 print(f'Done!  in  {finish - startTime}s')
